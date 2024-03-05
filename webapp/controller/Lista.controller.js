@@ -69,6 +69,22 @@ sap.ui.define([
                     oDialog.getBinding("items").filter([]);
                     oDialog.open();                        
                 })                
+            },
+
+            onValueHelpSearch: function(oEvent){
+                var sValue = oEvent.getParameter("value");
+
+                // Opção 1 - Crio um único objeto filtro:
+                // var oFilter = new Filter("Description", FilterOperator.Contains, sValue);
+                // oEvent.getSource().getBinding("items").filter([oFilter]);
+
+                // Opção 2 - Podemos criar um objeto (dinamico) onde adiciono várias propriedades:
+                var objFilter = { filters: [], and: false };
+                objFilter.filters.push(new Filter("Description", FilterOperator.Contains, sValue));
+                objFilter.filters.push(new Filter("Category", FilterOperator.Contains, sValue));
+
+                var oFilter = new Filter(objFilter);
+                oEvent.getSource().getBinding("items").filter(oFilter);
             }
         });
     });
