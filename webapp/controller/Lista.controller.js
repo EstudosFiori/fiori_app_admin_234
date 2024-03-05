@@ -2,7 +2,7 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "br/com/gestao/fioriappreport234/util/Formatter"            
+    "br/com/gestao/fioriappadmin234/util/Formatter"            
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -10,7 +10,7 @@ sap.ui.define([
     function (Controller, Filter, FilterOperator, Formatter) {
         "use strict";
 
-        return Controller.extend("br.com.gestao.fioriappreport234.controller.Lista", {
+        return Controller.extend("br.com.gestao.fioriappadmin234.controller.Lista", {
             
             objFormatter: Formatter,
 

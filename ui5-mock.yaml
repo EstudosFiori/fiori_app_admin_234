@@ -2,7 +2,7 @@
 
 specVersion: "3.1"
 metadata:
-  name: br.com.gestao.fioriappreport234
+  name: br.com.gestao.fioriappadmin234
 type: application
 server:
   customMiddleware:
