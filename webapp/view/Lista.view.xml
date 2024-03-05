@@ -1,4 +1,4 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:fb="sap.ui.comp.filterbar" controllerName="br.com.gestao.fioriappadmin234.controller.Lista" displayBlock="true">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:fb="sap.ui.comp.filterbar" controllerName="br.com.gestao.fioriappadmin2342.controller.Lista" displayBlock="true">
     <Page id="page" title="{i18n>title}">
         <content>
             <SemanticPage xmlns="sap.f.semantic" showFooter="false" preserveHeaderStateOnScroll="false" titleAreaShrinkRatio="1:1.6:1.6" id="page0">
@@ -20,6 +20,11 @@
                                     <sap.m:Input width="100%" id="productNameIput" placeholder="{i18n>fgitemNomeProdutoplaceholder}"/>
                                 </fb:control>
                             </fb:FilterGroupItem>
+                            <fb:FilterGroupItem id="_IDGenFilterGroupItem1" xmlns:sap.m="sap.m" label="{i18n>fgitemCategoria}" name="Categoria Produto" labelTooltip="{i18n>fgitemCategoriaTooltip}" groupTitle="{i18n>fgitemProdutogroup}" groupName="Principal" visibleInFilterBar="true">
+                                <fb:control>
+                                    <sap.m:Input id="productCategoryIput" width="100%" placeholder="{i18n>fgitemCategoriaplaceholder}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onCategoria"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>                            
                         </fb:filterGroupItems>
                     </fb:FilterBar>
                 </headerContent>

@@ -4,7 +4,7 @@
     xmlns="sap.uxap"
     xmlns:layout="sap.ui.layout"
     xmlns:m="sap.m"
-    controllerName="br.com.gestao.fioriappadmin234.controller.Detalhes"
+    controllerName="br.com.gestao.fioriappadmin2342.controller.Detalhes"
     displayBlock="true"
 >
     <m:Page

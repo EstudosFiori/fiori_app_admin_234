@@ -2,16 +2,17 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "br/com/gestao/fioriappadmin234/util/Formatter"            
+    "br/com/gestao/fioriappadmin2342/util/Formatter",    
+    "sap/ui/core/Fragment"    
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, Filter, FilterOperator, Formatter) {
+    function (Controller, Filter, FilterOperator,Formatter, Fragment) {
         "use strict";
 
-        return Controller.extend("br.com.gestao.fioriappadmin234.controller.Lista", {
-            
+        return Controller.extend("br.com.gestao.fioriappadmin2342.controller.Lista", {
+
             objFormatter: Formatter,
 
             onInit: function () {
@@ -48,6 +49,26 @@ sap.ui.define([
                 oRouter.navTo("Detalhes",{
                     productId: oProductId
                 });
+            },
+            onCategoria: function (oEvent){
+                debugger;
+                this._oInput = oEvent.getSource().getId();
+                var oView = this.getView();
+
+                if (!this._CategoriaSearchHelp) {
+                    this._CategoriaSearchHelp = Fragment.load({
+                        id: oView.getId(),
+                        name: "br.com.gestao.fioriappadmin2342.frags.SH_Categorias",
+                        controller: this
+                    }).then(function(oDialog){
+                        oView.addDependent(oDialog);
+                        return oDialog;                                                
+                    });
+                }
+                this._CategoriaSearchHelp.then(function(oDialog){
+                    oDialog.getBinding("items").filter([]);
+                    oDialog.open();                        
+                })                
             }
         });
     });

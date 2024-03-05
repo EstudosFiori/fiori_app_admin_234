@@ -1,12 +1,12 @@
 sap.ui.define(
     [
         "sap/ui/core/mvc/Controller",
-        "br/com/gestao/fioriappadmin234/util/Formatter"
+        "br/com/gestao/fioriappadmin2342/util/Formatter"
     ],
-    function(BaseController,Formatter) {
+    function(BaseController, Formatter) {
       "use strict";
   
-      return BaseController.extend("br.com.gestao.fioriappadmin234.controller.Detalhes", {
+      return BaseController.extend("br.com.gestao.fioriappadmin2342.controller.Detalhes", {
 
         objFormatter: Formatter,
 
@@ -38,7 +38,6 @@ sap.ui.define(
               }
             }
           });
-
         },
         onBindingChange: function(oEvent){
             var oView = this.getView();

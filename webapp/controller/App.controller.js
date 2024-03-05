@@ -5,7 +5,7 @@ sap.ui.define(
     function(BaseController) {
       "use strict";
   
-      return BaseController.extend("br.com.gestao.fioriappadmin234.controller.App", {
+      return BaseController.extend("br.com.gestao.fioriappadmin2342.controller.App", {
         onInit: function() {
         }
       });
