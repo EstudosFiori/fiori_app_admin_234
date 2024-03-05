@@ -1,0 +1,43 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:form="sap.ui.layout.form" controllerName="br.com.gestao.fioriappreport234.controller.Objetos" displayBlock="true">
+
+	<Panel id="_IDGenPanel1" expandable="true" headerText="Panel with a header text" width="auto" class="sapUiResponsiveMargin">
+		<content>
+			<Text id="_IDGenText1" text="Painel Content"/>
+			<List noDataText="Drop list items here" id="list0">
+			    <items>
+			        <StandardListItem type="Navigation" title="List Item 1" description="Description text" icon="sap-icon://picture" id="item1"/>
+			        <StandardListItem xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:form="sap.ui.layout.form" type="Navigation" title="List Item 2" description="Description text" icon="sap-icon://picture" id="item2"/>
+			    </items>
+			</List>
+		</content>
+	<headerToolbar>
+	    <Toolbar width="99%" id="toolbar1">
+			<Title text="Header" id="headerTitle"/>
+			<ToolbarSpacer id="toolbarSpacerID"/>
+	        <content>
+	            <Text xmlns="sap.m" text="Informação Adiocional List" id="text2"/>
+	        </content>
+	    </Toolbar>
+	</headerToolbar>
+	</Panel>
+	<Button xmlns="sap.m" text="Alterar texto Header" id="button0" icon="sap-icon://activate" press="onClicaSet"/>
+	<Button text="Ler objeto Header" id="button1" icon="sap-icon://activate" press="onClicaGet"/>
+	
+	<Panel xmlns="sap.m" width="auto" expandable="true" expanded="true" id="panel_formulario">
+	    <headerToolbar>
+	        <Toolbar id="toolbar3">
+	            <Title id="_IDGenTitle1" text="Adicionar Formulário via JS"/>
+	            <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+	            <Button id="_IDGenButton1" icon="sap-icon://settings"/>
+	            </Toolbar>
+	        
+	    </headerToolbar>
+	    <content>
+	        <Text text="Panel Content" id="text4"/>
+	        
+	    </content>
+	</Panel>
+	
+	<Button xmlns="sap.m" text="Criar um novo formulário runtime" id="button1_1702918515628" icon="sap-icon://activate" press="addFormulario"/>
+
+</mvc:View>

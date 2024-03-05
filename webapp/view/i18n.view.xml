@@ -1,0 +1,84 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    controllerName="br.com.gestao.fioriappreport234.controller.i18n"
+    displayBlock="true"
+>
+    <Shell id="shell">
+        <Page
+            id="page"
+            title="{i18n>title}"
+        >
+            <content>
+                <form:SimpleForm
+                    xmlns:sap.ui.core="sap.ui.core"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    id="form0"
+                >
+                    <form:content>
+                        <sap.ui.core:Title
+                            id="title0"
+                            text="{i18n>titleClientes}"
+                        />
+
+                        <Label
+                            text="{i18n>lblClientes}"
+                            id="label0"
+                        />
+
+                        <Input
+                            width="100%"
+                            id="cliente"
+                            placeholder="{i18n>placeholderCliente}"
+                        />
+
+                        <Label
+                            text="{i18n>lblEnderecoCliente}"
+                            id="label1"
+                        />
+
+                        <Input
+                            width="100%"
+                            id="endereco"
+                            placeholder="{i18n>placeholderEnderecoCliente}"
+                        />
+
+                        <Label
+                            text="{i18n>lblCidadeCliente}"
+                            width="100%"
+                            id="label0_1704222507084"
+                        />
+
+                        <Input
+                            xmlns="sap.m"
+                            id="cidade"
+                            placeholder="{i18n>placeholderCidadeCliente}"
+                        />
+
+                        <Label
+                            text="{i18n>lblEstadoCliente}"
+                            width="100%"
+                            id="label1_1704222534581"
+                        />
+
+                        <Input
+                            xmlns="sap.m"
+                            id="estado"
+                            placeholder="{i18n>placeholderEstadoCliente}"
+                        />
+                        
+                        <Button
+                            xmlns="sap.m"
+                            text="{i18n>btnEnviar}"
+                            press="enviarCadastro"
+                            id="button0"
+                            icon="sap-icon://action"
+                        />
+                    </form:content>
+                </form:SimpleForm>
+            </content>
+        </Page>
+    </Shell>
+</mvc:View>
