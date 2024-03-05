@@ -2,7 +2,7 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "br/com/gestao/fioriappadmin2342/util/Formatter",    
+    "br/com/gestao/fioriappadmin234/util/Formatter",    
     "sap/ui/core/Fragment"    
 ],
     /**
@@ -11,7 +11,7 @@ sap.ui.define([
     function (Controller, Filter, FilterOperator,Formatter, Fragment) {
         "use strict";
 
-        return Controller.extend("br.com.gestao.fioriappadmin2342.controller.Lista", {
+        return Controller.extend("br.com.gestao.fioriappadmin234.controller.Lista", {
 
             objFormatter: Formatter,
 
@@ -58,7 +58,7 @@ sap.ui.define([
                 if (!this._CategoriaSearchHelp) {
                     this._CategoriaSearchHelp = Fragment.load({
                         id: oView.getId(),
-                        name: "br.com.gestao.fioriappadmin2342.frags.SH_Categorias",
+                        name: "br.com.gestao.fioriappadmin234.frags.SH_Categorias",
                         controller: this
                     }).then(function(oDialog){
                         oView.addDependent(oDialog);
