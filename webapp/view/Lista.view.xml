@@ -20,7 +20,7 @@
                                     <sap.m:Input width="100%" id="productNameIput" placeholder="{i18n>fgitemNomeProdutoplaceholder}"/>
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="_IDGenFilterGroupItem1" xmlns:sap.m="sap.m" label="{i18n>fgitemCategoria}" name="Categoria Produto" labelTooltip="{i18n>fgitemCategoriaTooltip}" groupTitle="{i18n>fgitemProdutogroup}" groupName="Principal" visibleInFilterBar="true">
+                            <fb:FilterGroupItem xmlns:sap.m="sap.m" id="_IDGenFilterGroupItem1" label="{i18n>fgitemCategoria}" name="Categoria Produto" labelTooltip="{i18n>fgitemCategoriaTooltip}" groupTitle="{i18n>fgitemProdutogroup}" groupName="Principal" visibleInFilterBar="true">
                                 <fb:control>
                                     <sap.m:Input id="productCategoryIput" width="100%" placeholder="{i18n>fgitemCategoriaplaceholder}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onCategoria"/>
                                 </fb:control>
@@ -31,7 +31,11 @@
 
                 <titleMainAction/>
 
-                <titleCustomTextActions/>
+                <titleCustomTextActions>
+
+                    <Button xmlns="sap.m" text="{i18n>btnNovo}" id="button0" icon="sap-icon://add" press="onNovoProduto"/>
+
+                </titleCustomTextActions>
 
                 <titleCustomIconActions/>
 

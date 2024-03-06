@@ -111,7 +111,25 @@ sap.ui.define([
                 }
 
                 oInput.setValue(oSelectedItem.getTitle());
-            }
+            },
+            onNovoProduto: function (oEvent){
+                var oView = this.getView();
+
+                if (!this._Produto) {
+                    this._Produto = Fragment.load({
+                        id: oView.getId(),
+                        name: "br.com.gestao.fioriappadmin234.frags.Insert",
+                        controller: this
+                    }).then(function(oDialog){
+                        oView.addDependent(oDialog);
+                        return oDialog;                                                
+                    });
+                }
+                this._Produto.then(function(oDialog){
+                    oDialog.open();                        
+                })                
+            },
+            
         });
     });
  
