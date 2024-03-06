@@ -7,8 +7,7 @@
                 <sap.ui.layout.form:content>
                     <Label text="Label 1" id="label"/>
                     <Input width="100%" id="input"/>
-                </sap.ui.layout.form:content>
-                
+                </sap.ui.layout.form:content>    
                 <sap.ui.layout.form:title>
                     <core:Title text="Title" id="title6"/>
                 </sap.ui.layout.form:title>
