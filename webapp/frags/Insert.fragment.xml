@@ -1,3 +1,40 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	fiori_app_admin_234/webapp/frags/SH_Categorias.fragment.xml    
+
+    <Dialog id="_IDGenDialog1" title="{i18n>Chave}" resizable="false" draggable="false" contentWidth="37%">
+
+        <content>
+            <sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" minWidth="1024" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="1" emptySpanM="1" columnsL="2" columnsM="2" id="form0">
+                <sap.ui.layout.form:content>
+                    <Label text="Label 1" id="label"/>
+                    <Input width="100%" id="input"/>
+                </sap.ui.layout.form:content>
+                
+                <sap.ui.layout.form:title>
+                    <core:Title text="Title" id="title6"/>
+                </sap.ui.layout.form:title>
+
+            </sap.ui.layout.form:SimpleForm>
+
+            <sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" minWidth="1024" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="1" emptySpanM="1" columnsL="2" columnsM="2" id="form1">
+                <sap.ui.layout.form:content>
+                    <Label id="_IDGenLabel1" text="Label 1"/>           
+                    <Input id="_IDGenInput1" width="100%" />       
+                    <Input id="_IDGenInput2" width="100%" />
+                    <Label id="_IDGenLabel2" text="Label 2" />
+                    <Input id="_IDGenInput3" width="100%" />              
+                </sap.ui.layout.form:content>  
+
+                <sap.ui.layout.form:title>
+                    <core:Title text="Title" id="title7"/>            
+                </sap.ui.layout.form:title>         
+            </sap.ui.layout.form:SimpleForm>
+        </content>
+
+        <buttons>
+            <Button xmlns="sap.m" text="Button" id="button"/>
+            <Button xmlns="sap.m" text="Button" id="button01"/>
+        </buttons>
+
+    </Dialog>
+	    
 </core:FragmentDefinition>
