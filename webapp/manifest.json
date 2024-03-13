@@ -141,7 +141,7 @@
       }
     },
     "rootView": {
-      "viewName": "br.com.gestao.fioriappadmin234.view.App",
+      "viewName": "br.com.gestao.fioriappadmin234.view.Validacao",
       "type": "XML",
       "async": true,
       "id": "App"
