@@ -3,12 +3,14 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "br/com/gestao/fioriappadmin234/util/Formatter",    
-    "sap/ui/core/Fragment"    
+    "sap/ui/core/Fragment",
+    "sap/ui/core/ValueState",
+    "sap/ui/model/json/JSONModel"    
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, Filter, FilterOperator,Formatter, Fragment) {
+    function (Controller, Filter, FilterOperator,Formatter, Fragment, ValueState, JSONModel) {
         "use strict";
 
         return Controller.extend("br.com.gestao.fioriappadmin234.controller.Lista", {
@@ -17,9 +19,22 @@ sap.ui.define([
 
             onInit: function () {
             //debugger;
+
+                sap.ui.getCore().attachValidationError(function(oEvent){
+                    oEvent.getParameter("element").setValueState(ValueState.Error);
+                });
+    
+                sap.ui.getCore().attachValidationSuccess(function(oEvent){
+                    oEvent.getParameter("element").setValueState(ValueState.Success);
+                }); 
             //    var oConfiguration = sap.ui.getCore().getConfiguration();
             //    oConfiguration.setFormatLocale("en_US");
 
+            },
+            criarModel: function(){
+                // Model Produto
+                var oModel = new JSONModel();
+                this.getView().setModel(oModel,"MDL_Produto");
             },
             onSearch: function(){
                 var oProdutoInput       = this.getView().byId("productIdIput");
@@ -113,6 +128,9 @@ sap.ui.define([
                 oInput.setValue(oSelectedItem.getTitle());
             },
             onNovoProduto: function (oEvent){
+                
+                this.criarModel();
+
                 var oView = this.getView();
 
                 if (!this._Produto) {

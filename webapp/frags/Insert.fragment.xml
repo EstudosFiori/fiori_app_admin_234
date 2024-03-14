@@ -7,21 +7,24 @@
                 <sap.ui.layout.form:content>
                 <!-- Propriedade Name -->
                     <Label id="lblName" text="{i18n>sfNome}" required="true"/>
-                    <Input id="_IDGenInput6" width="65%" valueStateText="{i18n>sfNomeStateText}" maxLength="40" value="{MDL_Produto>/Name}"/>
+                    <Input id="_IDGenInput6" width="65%" valueStateText="{i18n>sfNomeStateText}" maxLength="40" value="{path: 'MDL_Produto>/Name', type: 'sap.ui.model.type.String',
+                    constraints:{search:'^[A-Za-z ]+$', minLength: 3, maxLength:50}}"/>
 
                     <!-- Propriedade Description -->
                     <Label id="lblDescr" text="{i18n>sfDescription}"/>
-                    <TextArea id="textNote" width="65%" rows="4" maxLength="255" value="{ path : 'MDL_Produto>/Description',  type : 'sap.ui.model.type.String', constraints : {minLength: 5, maxLength: 255 }}">
+                    <TextArea id="textNote" width="65%" rows="4" maxLength="255" value="{ path : 'MDL_Produto>/Description',  type : 'sap.ui.model.type.String', constraints: {minLength: 5} }">
                     </TextArea>
 
                     <!-- Propriedade Category -->
                     <Label id="lblCategory" text="{i18n>sfCategory}" required="true"/>
-                    <Input id="_IDGenInput7" showValueHelp="true" valueHelpRequest=".onCategoria" valueHelpOnly="true" width="65%" value="{ path : 'MDL_Produto>/Category',  type : 'sap.ui.model.type.String', constraints : {search: '^[a-zA-Z]+[\\s]?[a-zA-Z]+$', minLength: 3, maxLength: 50 }}">
+                    <Input id="_IDGenInput7" showValueHelp="true" valueHelpRequest=".onCategoria" valueHelpOnly="true" width="65%" value="{ path : 'MDL_Produto>/Category',  type : 'sap.ui.model.type.String', constraints : {search: '^[a-zA-Z]+[\\s]?[a-zA-Z]+$', minLength: 1 }}">
                     </Input>
 
                     <!-- Propriedade Price -->
                     <Label id="lblPrice" text="{i18n>sfPrice}" required="true"/>
-                    <Input id="_IDGenInput5" width="65%" value="{                                      path : 'MDL_Produto>/Price',                                      type : 'sap.ui.model.type.Float',                                     formatOptions : {                                             maxFractionDigits: 2,                                             minFractionDigits: 2,                                             groupingSeparator: '.',                                             decimalSeparator: ','                                     },                                     constraints : {                                          minLength : 1,                                          minimum : 5,                                          maximum : 10000000                                      }                                 }"/>
+                    <Input xmlns="sap.m" width="65%" value="{path: 'MDL_Produto>/Price', 
+                        type: 'sap.ui.model.type.Currency', 
+                        constraints:{minimum: 5, maximum:10000}}" id="_IDGenInput5"/>
 
                     <!-- Propriedade Status -->
                     <Label id="lblStatus" text="{i18n>sfStatus}" required="true"/>
@@ -67,7 +70,10 @@
                 <sap.ui.layout.form:content>
                 <!-- Propriedade Measure Unit -->
                     <Label id="lblMeasureUnit" text="{i18n>sfMeasureunit}" required="true"/>
-                    <Input id="inputGrossAmount" width="65%" value="{path : 'MDL_Produto>/Measureunit', type : 'sap.ui.model.type.String', constraints: { search: '^[A-Za-z]+$', minLength: 1, maxLength: 2 } }">
+                    <Input id="inputGrossAmount" width="65%" valueStateText="{i18n>sfMeasureunit}" value="{path : 'MDL_Produto>/Measureunit', 
+                    type : 'sap.ui.model.type.Float', 
+                    formatOptions:{minFractionDigits: 2, maxFractionDigits: 2}, 
+                    constraints:{minimum:1, maximum: 6} }">
                     </Input>
 
                 <!-- Propriedade Weight Measure -->
@@ -82,17 +88,28 @@
 
                 <!-- Propriedade Width -->
                     <Label id="lblWidth" text="{i18n>sfWidth}" required="true"/>
-                    <Input id="_IDGenInput12" width="65%" type="Number" value="{path : 'MDL_Produto>/Width', type : 'sap.ui.model.type.String', constraints: { minLength: 1, maxLength: 6 } }">
+                    <Input id="_IDGenInput12" width="65%" type="Number" value="{path : 'MDL_Produto>/Width', 
+                    type : 'sap.ui.model.type.Float', 
+                    formatOptions:{minFractionDigits: 2, maxFractionDigits: 2}, 
+                    constraints:{minimum:1, maximum: 6} }">
                     </Input>
 
                 <!-- Propriedade Depth -->
                     <Label id="lblDepth" text="{i18n>sfDepth}" required="true"/>
-                    <Input id="_IDGenInput8" width="65%" type="Number" value="{path : 'MDL_Produto>/Depth', type : 'sap.ui.model.type.String', constraints: { minLength: 1, maxLength: 6 } }">
+                    <!-- <Input id="_IDGenInput8" width="65%" type="Number" value="{path : 'MDL_Produto>/Depth', type : 'sap.ui.model.type.String', constraints: { minLength: 1, maxLength: 6 } }"> -->
+                    <Input id="_IDGenInput8" width="65%" type="Number" value="{path : 'MDL_Produto>/Depth', 
+                    type:'sap.ui.model.type.Float', 
+                    formatOptions:{minFractionDigits: 2, maxFractionDigits: 2}, 
+                    constraints:{minimum:1, maximum: 6} }">
                     </Input>
 
                 <!-- Propriedade Height -->
                     <Label id="lblHeight" text="{i18n>sfHeight}" required="true"/>
-                    <Input id="_IDGenInput9" width="65%" type="Number" value="{path : 'MDL_Produto>/Height', type : 'sap.ui.model.type.String', constraints: { minLength: 1, maxLength: 6 } }">
+                    <!-- <Input id="_IDGenInput9" width="65%" type="Number" value="{path : 'MDL_Produto>/Height', type : 'sap.ui.model.type.String', constraints: { minLength: 1, maxLength: 6 } }"> -->
+                    <Input id="_IDGenInput9" width="65%" type="Number" value="{path : 'MDL_Produto>/Height', 
+                    type : 'sap.ui.model.type.Float', 
+                    formatOptions:{minFractionDigits: 2, maxFractionDigits: 2}, 
+                    constraints:{minimum:1, maximum: 6} }">
                     </Input>
 
                 <!-- Propriedade Dimun -->
