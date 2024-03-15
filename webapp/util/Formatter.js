@@ -7,8 +7,6 @@ function (NumberFormat) {
     var Formatter = {
 
         date: function(value){
-
-            debugger;
             var oConfiguration  = sap.ui.getCore().getConfiguration();
             var oLocale         = oConfiguration.getFormatLocale();
             var oPattern        = "";

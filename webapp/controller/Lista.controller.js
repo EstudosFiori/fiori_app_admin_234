@@ -5,12 +5,13 @@ sap.ui.define([
     "br/com/gestao/fioriappadmin234/util/Formatter",    
     "sap/ui/core/Fragment",
     "sap/ui/core/ValueState",
-    "sap/ui/model/json/JSONModel"    
+    "sap/ui/model/json/JSONModel",
+    "br/com/gestao/fioriappadmin234/util/Validator"    
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, Filter, FilterOperator,Formatter, Fragment, ValueState, JSONModel) {
+    function (Controller, Filter, FilterOperator,Formatter, Fragment, ValueState, JSONModel, Validator) {
         "use strict";
 
         return Controller.extend("br.com.gestao.fioriappadmin234.controller.Lista", {
@@ -74,7 +75,6 @@ sap.ui.define([
                 });
             },
             onCategoria: function (oEvent){
-                debugger;
                 this._oInput = oEvent.getSource().getId();
                 var oView = this.getView();
 
@@ -147,6 +147,13 @@ sap.ui.define([
                     oDialog.open();                        
                 })                
             },
+            onValida: function(){
+                var validator = new Validator();
+
+                if(validator.validate(this.byId("_IDGenDialog1"))){
+                    this.onInsert();   
+                }
+            }
             
         });
     });
