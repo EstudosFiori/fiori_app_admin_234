@@ -7,12 +7,15 @@ sap.ui.define([
     "sap/ui/core/ValueState",
     "sap/ui/model/json/JSONModel",
     "br/com/gestao/fioriappadmin234/util/Validator",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "sap/m/BusyDialog",
+    "sap/ui/model/odata",
+    "sap/m/MessageToast"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, Filter, FilterOperator, Formatter, Fragment, ValueState, JSONModel, Validator, MessageBox) {
+    function (Controller, Filter, FilterOperator, Formatter, Fragment, ValueState, JSONModel, Validator, MessageBox, BusyDialog, odata, MessageToast) {
         "use strict";
 
         return Controller.extend("br.com.gestao.fioriappadmin234.controller.Lista", {
@@ -176,6 +179,48 @@ sap.ui.define([
 
                 // 4 - Criar o obj model ref do model default (OData)
                 var oModelProduto = this.getView().getModel();
+
+                MessageBox.confirm(
+                    bundle.getText("insertDialogMsg"), // Pergunta para o processo
+                    function(oAction) { // função de disparo do insert
+
+                        // Verficando se usuário confirmou ou não a operação
+                        if (MessageBox.Action.OK === oAction) {
+                            t._oBusyDialog = new BusyDialog({
+                                text: bundle.getText("Sendind")
+                            });
+
+                            t._oBusyDialog.open();
+
+                            setTimeout(function () {
+                                var oModelSend = new odata.ODataModel(oModelProduto.sServiceUrl,true);
+                                oModelSend.create("Produtos", objNovo, null, 
+                                    function(d, r) { // Função de Retorno Sucesso
+                                        if (r.statusCode === 201) 
+                                        {
+                                            MessageToast.show(bundle.getText("insertDialogSuccess", [objNovo.Productid]),
+                                            {
+                                                duration: 4000
+                                            });
+
+                                            // Fechar o obj Dialog do fragment
+                                            t.dialogClose();
+
+                                            // dar um refresh no model default
+                                            t.getView().getModel().refresh();
+
+                                            // Fechar o BusyDialog
+                                            t._oBusyDialog.close();
+                                        }
+                                    }, function(e) { // Função de Retorno Erro
+                                        
+                                    }
+                                );
+                            }, 2000 );
+                        }
+                    },
+                    bundle.getText("insertDialogTitle"), // Pergunta para o processo
+                )
             },
 
             // Geramos um ID de Produto Dinamico
@@ -185,6 +230,11 @@ sap.ui.define([
                         v = c == 'x' ? r : (r & 0x3 | 0x8);
                     returnv.toString(16).toUpperCase();
                 });
+            },
+
+            // Fechamento do Dialog do Fragment
+            dialogClose: function() {
+                this._Produto.close();
             }
         });
     });

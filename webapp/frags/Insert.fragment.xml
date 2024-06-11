@@ -133,7 +133,7 @@
 
         <buttons>
             <Button xmlns="sap.m" text="{i18n>btnInserir}" id="button" type="Accept" press="onValida" icon="sap-icon://add"/>
-            <Button xmlns="sap.m" text="{i18n>btnCancelar}" id="button01"/>
+            <Button xmlns="sap.m" text="{i18n>btnCancelar}" id="button01" press="dialogClose" />
         </buttons>
 
     </Dialog>
