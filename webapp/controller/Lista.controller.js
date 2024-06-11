@@ -2,16 +2,17 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "br/com/gestao/fioriappadmin234/util/Formatter",    
+    "br/com/gestao/fioriappadmin234/util/Formatter",
     "sap/ui/core/Fragment",
     "sap/ui/core/ValueState",
     "sap/ui/model/json/JSONModel",
-    "br/com/gestao/fioriappadmin234/util/Validator"    
+    "br/com/gestao/fioriappadmin234/util/Validator",
+    "sap/m/MessageBox"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, Filter, FilterOperator,Formatter, Fragment, ValueState, JSONModel, Validator) {
+    function (Controller, Filter, FilterOperator, Formatter, Fragment, ValueState, JSONModel, Validator, MessageBox) {
         "use strict";
 
         return Controller.extend("br.com.gestao.fioriappadmin234.controller.Lista", {
@@ -19,29 +20,29 @@ sap.ui.define([
             objFormatter: Formatter,
 
             onInit: function () {
-            //debugger;
+                //debugger;
 
-                sap.ui.getCore().attachValidationError(function(oEvent){
+                sap.ui.getCore().attachValidationError(function (oEvent) {
                     oEvent.getParameter("element").setValueState(ValueState.Error);
                 });
-    
-                sap.ui.getCore().attachValidationSuccess(function(oEvent){
+
+                sap.ui.getCore().attachValidationSuccess(function (oEvent) {
                     oEvent.getParameter("element").setValueState(ValueState.Success);
-                }); 
-            //    var oConfiguration = sap.ui.getCore().getConfiguration();
-            //    oConfiguration.setFormatLocale("en_US");
+                });
+                //    var oConfiguration = sap.ui.getCore().getConfiguration();
+                //    oConfiguration.setFormatLocale("en_US");
 
             },
-            criarModel: function(){
+            criarModel: function () {
                 // Model Produto
                 var oModel = new JSONModel();
-                this.getView().setModel(oModel,"MDL_Produto");
+                this.getView().setModel(oModel, "MDL_Produto");
             },
-            onSearch: function(){
-                var oProdutoInput       = this.getView().byId("productIdIput");
-                var oProdutoNameInput   = this.getView().byId("productNameIput");
-                var oProdutoCategoryInput   = this.getView().byId("productCategoryIput");
- 
+            onSearch: function () {
+                var oProdutoInput = this.getView().byId("productIdIput");
+                var oProdutoNameInput = this.getView().byId("productNameIput");
+                var oProdutoCategoryInput = this.getView().byId("productCategoryIput");
+
                 var objFilter = { filters: [], and: true };
                 objFilter.filters.push(new Filter("Productid", FilterOperator.Contains, oProdutoInput.getValue()));
                 objFilter.filters.push(new Filter("Name", FilterOperator.Contains, oProdutoNameInput.getValue()));
@@ -56,25 +57,25 @@ sap.ui.define([
                 //     ],
                 //     and: true
                 // });
- 
+
                 var oTable = this.getView().byId("tableProdutos");
                 var oBinding = oTable.getBinding("items");
- 
+
                 oBinding.filter(oFilter);
             },
             onRouting: function () {
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.navTo("Detalhes");
-            },                            
+            },
             onSelectItem: function (evt) {
                 var oProductId = evt.getSource().getBindingContext().getProperty("Productid");
 
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                oRouter.navTo("Detalhes",{
+                oRouter.navTo("Detalhes", {
                     productId: oProductId
                 });
             },
-            onCategoria: function (oEvent){
+            onCategoria: function (oEvent) {
                 this._oInput = oEvent.getSource().getId();
                 var oView = this.getView();
 
@@ -83,18 +84,18 @@ sap.ui.define([
                         id: oView.getId(),
                         name: "br.com.gestao.fioriappadmin234.frags.SH_Categorias",
                         controller: this
-                    }).then(function(oDialog){
+                    }).then(function (oDialog) {
                         oView.addDependent(oDialog);
-                        return oDialog;                                                
+                        return oDialog;
                     });
                 }
-                this._CategoriaSearchHelp.then(function(oDialog){
+                this._CategoriaSearchHelp.then(function (oDialog) {
                     oDialog.getBinding("items").filter([]);
-                    oDialog.open();                        
-                })                
+                    oDialog.open();
+                })
             },
 
-            onValueHelpSearch: function(oEvent){
+            onValueHelpSearch: function (oEvent) {
                 var sValue = oEvent.getParameter("value");
 
                 // Opção 1 - Crio um único objeto filtro:
@@ -117,7 +118,7 @@ sap.ui.define([
                 if (this.byId(this._oInput)) {
                     oInput = this.byId(this._oInput);
                 } else {
-                    oInput = sap.ui.getCore().byId(this._oInput)                    
+                    oInput = sap.ui.getCore().byId(this._oInput)
                 }
 
                 if (!oSelectedItem) {
@@ -127,8 +128,8 @@ sap.ui.define([
 
                 oInput.setValue(oSelectedItem.getTitle());
             },
-            onNovoProduto: function (oEvent){
-                
+            onNovoProduto: function (oEvent) {
+
                 this.criarModel();
 
                 var oView = this.getView();
@@ -138,23 +139,53 @@ sap.ui.define([
                         id: oView.getId(),
                         name: "br.com.gestao.fioriappadmin234.frags.Insert",
                         controller: this
-                    }).then(function(oDialog){
+                    }).then(function (oDialog) {
                         oView.addDependent(oDialog);
-                        return oDialog;                                                
+                        return oDialog;
                     });
                 }
-                this._Produto.then(function(oDialog){
-                    oDialog.open();                        
-                })                
+                this._Produto.then(function (oDialog) {
+                    oDialog.open();
+                })
             },
-            onValida: function(){
+            onValida: function () {
                 var validator = new Validator();
 
-                if(validator.validate(this.byId("_IDGenDialog1"))){
-                    this.onInsert();   
+                if (validator.validate(this.byId("_IDGenDialog1"))) {
+                    this.onInsert();
                 }
+            },
+
+            onInsert: function () {
+                // 1 - Criando uma ref do obj model que está recebendo as informações do fragment
+                var oModel = this.getView().getModel("MDL_Produto");
+                var objNovo = oModel.getData();
+
+                // 2 - Manipular propriedades
+                objNovo.Productid = this.geraID();
+                objNovo.Price = objNovo.Price[0].toString();
+                objNovo.Createdat = this.objFormatter.dateSAP(objNovo.Createdat);
+                objNovo.Currencycode = "BRL";
+                objNovo.Userupdate = "";
+
+                // 3 - Criando uma ref do arquivo i18n
+                var bundle = this.getView().getModel("i18n").getResourceBundle();
+
+                // Variavel contexto da View
+                var t = this;
+
+                // 4 - Criar o obj model ref do model default (OData)
+                var oModelProduto = this.getView().getModel();
+            },
+
+            // Geramos um ID de Produto Dinamico
+            geraID: function () {
+                return 'xxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                    varr = Math.random() * 16 | 0,
+                        v = c == 'x' ? r : (r & 0x3 | 0x8);
+                    returnv.toString(16).toUpperCase();
+                });
             }
-            
         });
     });
- 
+

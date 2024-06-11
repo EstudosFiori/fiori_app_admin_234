@@ -33,6 +33,20 @@ function (NumberFormat) {
                 return value;
             }
         },
+
+        dateSAP:function(value) {
+            if(value) {
+                var dateParts = value.split("/");
+                var dateObject = newDate(dateParts[2], dateParts[1] - 1, dateParts[0]);
+                var oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({
+                    pattern:"yyyy-MM-ddTHH:mm:ss"
+                });
+                return oDateFormat.format(newDate(dateObject));
+            } else{
+                return value;
+            }
+        },  
+
         statusProduto: function(value){
             var oBundle = this.getView().getModel("i18n").getResourceBundle();
 
@@ -81,8 +95,7 @@ function (NumberFormat) {
                 decimalSeparator: ","
             });
             return numFloat.format(value);
-        },          
-
+        },                
     };
 
     return Formatter;
