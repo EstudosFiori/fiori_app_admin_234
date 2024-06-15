@@ -9,13 +9,13 @@ sap.ui.define([
     "br/com/gestao/fioriappadmin234/util/Validator",
     "sap/m/MessageBox",
     "sap/m/BusyDialog",
-    "sap/ui/model/odata",
+    "sap/ui/model/odata/ODataModel",
     "sap/m/MessageToast"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, Filter, FilterOperator, Formatter, Fragment, ValueState, JSONModel, Validator, MessageBox, BusyDialog, odata, MessageToast) {
+    function (Controller, Filter, FilterOperator, Formatter, Fragment, ValueState, JSONModel, Validator, MessageBox, BusyDialog, ODataModel, MessageToast) {
         "use strict";
 
         return Controller.extend("br.com.gestao.fioriappadmin234.controller.Lista", {
@@ -167,6 +167,10 @@ sap.ui.define([
                 // 2 - Manipular propriedades
                 objNovo.Productid = this.geraID();
                 objNovo.Price = objNovo.Price[0].toString();
+                objNovo.Weightmeasure = objNovo.Weightmeasure.toString();
+                objNovo.Width = objNovo.Width.toString();
+                objNovo.Depth = objNovo.Depth.toString();
+                objNovo.Height = objNovo.Height.toString();
                 objNovo.Createdat = this.objFormatter.dateSAP(objNovo.Createdat);
                 objNovo.Currencycode = "BRL";
                 objNovo.Userupdate = "";
@@ -182,8 +186,8 @@ sap.ui.define([
 
                 MessageBox.confirm(
                     bundle.getText("insertDialogMsg"), // Pergunta para o processo
-                    function(oAction) { // função de disparo do insert
-
+                    function (oAction) { // função de disparo do insert
+                        debugger;
                         // Verficando se usuário confirmou ou não a operação
                         if (MessageBox.Action.OK === oAction) {
                             t._oBusyDialog = new BusyDialog({
@@ -193,15 +197,14 @@ sap.ui.define([
                             t._oBusyDialog.open();
 
                             setTimeout(function () {
-                                var oModelSend = new odata.ODataModel(oModelProduto.sServiceUrl,true);
-                                oModelSend.create("Produtos", objNovo, null, 
-                                    function(d, r) { // Função de Retorno Sucesso
-                                        if (r.statusCode === 201) 
-                                        {
+                                var oModelSend = new ODataModel(oModelProduto.sServiceUrl, true);
+                                oModelSend.create("Produtos", objNovo, null,
+                                    function (d, r) { // Função de Retorno Sucesso
+                                        if (r.statusCode === 201) {
                                             MessageToast.show(bundle.getText("insertDialogSuccess", [objNovo.Productid]),
-                                            {
-                                                duration: 4000
-                                            });
+                                                {
+                                                    duration: 4000
+                                                });
 
                                             // Fechar o obj Dialog do fragment
                                             t.dialogClose();
@@ -212,11 +215,20 @@ sap.ui.define([
                                             // Fechar o BusyDialog
                                             t._oBusyDialog.close();
                                         }
-                                    }, function(e) { // Função de Retorno Erro
-                                        
+                                    }, function (e) { // Função de Retorno Erro
+
+                                        // Fechar o BusyDialog
+                                        t._oBusyDialog.close();
+                                        var oRet = JSON.parse(e.response.body);
+                                        MessageToast.show(oRet.error.message.value,
+                                            {
+                                                duration: 40000
+                                            });
+
+
                                     }
                                 );
-                            }, 2000 );
+                            }, 2000);
                         }
                     },
                     bundle.getText("insertDialogTitle"), // Pergunta para o processo
@@ -226,15 +238,17 @@ sap.ui.define([
             // Geramos um ID de Produto Dinamico
             geraID: function () {
                 return 'xxxxxxxxxx'.replace(/[xy]/g, function (c) {
-                    varr = Math.random() * 16 | 0,
+                    var r = Math.random() * 16 | 0,
                         v = c == 'x' ? r : (r & 0x3 | 0x8);
-                    returnv.toString(16).toUpperCase();
+                    return v.toString(16).toUpperCase();
                 });
             },
 
             // Fechamento do Dialog do Fragment
-            dialogClose: function() {
-                this._Produto.close();
+            dialogClose: function () {
+                this._Produto.then(function (oDialog) {
+                    oDialog.close();
+                })
             }
         });
     });
